@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://tbcqvbpbaayg"]
+
+[ext_resource type="Script" path="res://diam.gd" id="1_355ip"]
+[ext_resource type="Texture2D" uid="uid://coe64baus6ryu" path="res://red.png" id="1_t3v6y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bbeq"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuunn"]
+size = Vector2(34, 34)
+
+[node name="diam" type="CharacterBody2D"]
+script = ExtResource("1_355ip")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3bbeq")
+
+[node name="redsprite" type="Sprite2D" parent="collision"]
+texture = ExtResource("1_t3v6y")
+
+[node name="detectcollision" type="Area2D" parent="." groups=["diam"]]
+
+[node name="areacollision" type="CollisionShape2D" parent="detectcollision"]
+shape = SubResource("RectangleShape2D_tuunn")
+
+[connection signal="area_entered" from="detectcollision" to="." method="_on_detectcollision_area_entered"]

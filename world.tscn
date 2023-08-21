@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://mg6xhnsgvj7x"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_lj1h1"]
+[ext_resource type="Texture2D" uid="uid://bwqmht0dw6ci3" path="res://white.png" id="1_nrnge"]
+[ext_resource type="PackedScene" uid="uid://bj45cwgpgi4o" path="res://gerak.tscn" id="2_o36nh"]
+[ext_resource type="PackedScene" uid="uid://tbcqvbpbaayg" path="res://diam.tscn" id="3_nvxqg"]
+[ext_resource type="PackedScene" uid="uid://cpl7lx5lbq6t7" path="res://ball.tscn" id="4_rxv7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgstv"]
+size = Vector2(1152, 168)
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_lj1h1")
+follow_speed = 0.2
+
+[node name="gerak" parent="." instance=ExtResource("2_o36nh")]
+position = Vector2(368, 464)
+
+[node name="diam" parent="." instance=ExtResource("3_nvxqg")]
+position = Vector2(720, 464)
+
+[node name="base" type="StaticBody2D" parent="."]
+
+[node name="basecollision" type="CollisionShape2D" parent="base"]
+position = Vector2(576, 564)
+shape = SubResource("RectangleShape2D_wgstv")
+
+[node name="whitesprite" type="Sprite2D" parent="base/basecollision"]
+position = Vector2(6.10352e-05, 1.52588e-05)
+scale = Vector2(36, 5.25)
+texture = ExtResource("1_nrnge")
+
+[node name="ball" parent="." instance=ExtResource("4_rxv7c")]
+position = Vector2(664, 440)
+
+[connection signal="tukar" from="gerak" to="." method="_on_gerak_tukar"]

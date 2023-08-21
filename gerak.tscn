@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj45cwgpgi4o"]
+
+[ext_resource type="Script" path="res://gerak.gd" id="1_8ve4l"]
+[ext_resource type="Texture2D" uid="uid://i0xdwequhtgi" path="res://blue.png" id="1_h1rs4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_peg2n"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xiyks"]
+size = Vector2(34, 34)
+
+[node name="gerak" type="CharacterBody2D"]
+script = ExtResource("1_8ve4l")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_peg2n")
+
+[node name="bluesprite" type="Sprite2D" parent="collision"]
+texture = ExtResource("1_h1rs4")
+
+[node name="detectcollision" type="Area2D" parent="." groups=["gerak"]]
+
+[node name="areacollision" type="CollisionShape2D" parent="detectcollision"]
+shape = SubResource("RectangleShape2D_xiyks")
+
+[connection signal="area_entered" from="detectcollision" to="." method="_on_detectcollision_area_entered"]
